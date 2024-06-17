@@ -45,8 +45,7 @@ public class ProgramTest {
     @DisplayName("Given negative time value, then an error message should be thrown")
     void checkTimeAsANegativeValue() {
         int time = -1;
-        //invalid time test
-        String expectedGreeting = "error";
+        String expectedGreeting = "Invalid value";
         String actualGreeting = Program.getGreeting(time);
         Assertions.assertEquals(expectedGreeting, actualGreeting);
     }

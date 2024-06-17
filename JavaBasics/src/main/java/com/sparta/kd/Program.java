@@ -12,12 +12,14 @@ public class Program {
     // Comments shouldn't explain what code does, they should be used to remind yourself of your work
     public static String getGreeting(int timeOfDay) {
         String greeting;
-        if (timeOfDay >= 5 && timeOfDay <= 12) { // if statement - control flow
+        if (timeOfDay < 0) {
+            greeting = "Invalid value";
+        } else if (timeOfDay >= 5 && timeOfDay < 12) {
           greeting = "Good morning!";
         } else if (timeOfDay >= 12 && timeOfDay <= 18) {
             greeting = "Good afternoon!";
         } else {
-          greeting =  "Good evening!";
+          greeting = "Good evening!";
         }
         return greeting;
     }
