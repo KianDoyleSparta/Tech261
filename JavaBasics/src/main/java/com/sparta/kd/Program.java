@@ -10,7 +10,7 @@ public class Program {
     }
 
     // Comments shouldn't explain what code does, they should be used to remind yourself of your work
-    private static String getGreeting(int timeOfDay) {
+    public static String getGreeting(int timeOfDay) {
         String greeting;
         if (timeOfDay >= 5 && timeOfDay <= 12) { // if statement - control flow
           greeting = "Good morning!";
