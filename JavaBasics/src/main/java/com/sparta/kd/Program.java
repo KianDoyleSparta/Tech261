@@ -6,16 +6,19 @@ public class Program {
     // Refactoring - don't change what the code does - change the way it does it
     public static void main(String[] args) { // entry point - methods NOT functions
         int timeOfDay = 21; // strongly typed - variables MUST be declared with a type // statically typed - variables cannot have a mismatched type and value
-        getGreeting(timeOfDay);
+        System.out.println(getGreeting(timeOfDay));
     }
 
-    private static void getGreeting(int timeOfDay) {
+    // Comments shouldn't explain what code does, they should be used to remind yourself of your work
+    private static String getGreeting(int timeOfDay) {
+        String greeting;
         if (timeOfDay >= 5 && timeOfDay <= 12) { // if statement - control flow
-            System.out.println("Good morning!");
+          greeting = "Good morning!";
         } else if (timeOfDay >= 12 && timeOfDay <= 18) {
-            System.out.println("Good afternoon!");
+            greeting = "Good afternoon!";
         } else {
-            System.out.println("Good evening!");
+          greeting =  "Good evening!";
         }
+        return greeting;
     }
 }
