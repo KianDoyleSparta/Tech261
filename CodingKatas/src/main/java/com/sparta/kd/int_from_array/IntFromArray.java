@@ -1,3 +1,5 @@
+package com.sparta.kd.int_from_array;
+
 public class IntFromArray {
 
     public static int convertArrayToInt(int[] input) {

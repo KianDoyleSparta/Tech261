@@ -1,3 +1,5 @@
+package com.sparta.kd.int_from_array;
+
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
