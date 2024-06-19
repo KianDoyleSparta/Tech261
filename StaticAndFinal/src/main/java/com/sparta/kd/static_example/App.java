@@ -15,6 +15,8 @@ public class App {
         Spartan.printSpartan(manish);
         Spartan.printSpartan(alex);
 
+        System.out.println(manish.equals(alex));
+
     }
 
 }
