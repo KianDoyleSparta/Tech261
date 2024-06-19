@@ -35,4 +35,21 @@ public class IntFromArrayTests {
         Assertions.assertEquals(expected, actual);
     }
 
+    @Test
+    public void checkIntArrayReturnsIntConversionWithNegatives() {
+        int[] input = {1, 3, -5};
+        int expected = 135;
+        int actual = IntFromArray.convertArrayToInt(input);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkIntArrayReturnsIntConversionAsZeroWhenEmptyInput() {
+        int[] input = {};
+        int expected = 0;
+        int actual = IntFromArray.convertArrayToInt(input);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    // There are quite a few more parameters that I should have asked ICL, even just the seemingly obvious ones
 }
