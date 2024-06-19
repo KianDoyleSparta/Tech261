@@ -29,8 +29,8 @@ public class IntFromArrayTests {
 
     @Test
     public void checkIntArrayReturnsIntConversionWithDoubleDigitIntsAndNoLeadingZero() {
-        int[] input = {1, 2, 3};
-        int expected = 123;
+        int[] input = {1, 0, 31};
+        int expected = 1031;
         int actual = IntFromArray.convertArrayToInt(input);
         Assertions.assertEquals(expected, actual);
     }
