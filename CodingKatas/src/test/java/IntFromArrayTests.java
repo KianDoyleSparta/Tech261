@@ -13,8 +13,8 @@ public class IntFromArrayTests {
 
     @Test
     public void checkIntArrayReturnsIntConversionWithoutLeadingZero() {
-        int[] input = {0, 1, 2, 3};
-        int expected = 123;
+        int[] input = {0, 0, 2, 3};
+        int expected = 23;
         int actual = IntFromArray.convertArrayToInt(input);
         Assertions.assertEquals(expected, actual);
     }
@@ -34,6 +34,5 @@ public class IntFromArrayTests {
         int actual = IntFromArray.convertArrayToInt(input);
         Assertions.assertEquals(expected, actual);
     }
-
 
 }
