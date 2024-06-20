@@ -28,4 +28,22 @@ public class DuplicateNeighboursTest {
         boolean actual = DuplicateNeighbours.containsDuplicates(input);
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void checkEmptyArrayReturnsFalse() {
+        int[] input = {};
+        boolean expected = false;
+        boolean actual = DuplicateNeighbours.containsDuplicates(input);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void checkArrayOfTwoValuesReturnsFalse() {
+        int[] input = {-1, -1};
+        boolean expected = false;
+        boolean actual = DuplicateNeighbours.containsDuplicates(input);
+        Assertions.assertEquals(expected, actual);
+    }
+
+
 }
