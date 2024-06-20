@@ -22,13 +22,18 @@ public class PalindromeChecker {
 
     public static String flipString(String input) {
 
-        StringBuilder flippedString = new StringBuilder();
-        char[] charArrayInput = input.toCharArray();
+//        StringBuilder flippedString = new StringBuilder();
+//        char[] charArrayInput = input.toCharArray();
+//
+//        for (char letter: charArrayInput) {
+//            flippedString.insert(0, letter);
+//        }
 
-        for (char letter: charArrayInput) {
-            flippedString.insert(0, letter);
-        }
-        return String.valueOf(flippedString);
+        StringBuilder inputBuilder = new StringBuilder(input);
+
+        StringBuilder flippedInputBuilder = inputBuilder.reverse();
+
+        return String.valueOf(flippedInputBuilder);
     }
 
 }
