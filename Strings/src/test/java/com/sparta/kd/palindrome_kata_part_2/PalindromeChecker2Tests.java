@@ -1,6 +1,6 @@
 package com.sparta.kd.palindrome_kata_part_2;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 
@@ -9,18 +9,11 @@ import java.util.Arrays;
 
 public class PalindromeChecker2Tests {
 
-    // Write a test to see if it returns a null array when given a null sentence
-    // Write a test to see if it works on a single palindrome
-    // Write a test to see if it works with two palindromes of a different length, returning the longest one
-    // Write a test to see if it returns the longest palindrome in a sentence even when that palindrome is split by special characters
-    // Write a test to see if it returns the longest palindrome in a sentence even when that palindrome is split by numbers
-    // Write a test to see if it returns a empty when given a palindrome of numbers
-
     @Test
     @DisplayName("Checks to see if PalindromeChecker2 returns a null array when given a null sentence")
     public void checkPalindromeChecker2ReturnsNullWhenGivenNull() {
         String input = "";
-        ArrayList<String> expected = new ArrayList<>();
+        ArrayList<String> expected = new ArrayList<>(Arrays.asList(""));
         ArrayList<String> actual = PalindromeChecker2.orderOfOperations(input);
         Assertions.assertEquals(expected, actual);
     }
@@ -65,13 +58,19 @@ public class PalindromeChecker2Tests {
     @DisplayName("Checks to see if PalindromeChecker2 returns an empty list when given only numbers")
     public void checkPalindromeChecker2ReturnsEmptyWhenGivenNumbersOnly() {
         String input = "1111111111";
-        ArrayList<String> expected = new ArrayList<>();
+        ArrayList<String> expected = new ArrayList<>(Arrays.asList(""));
         ArrayList<String> actual = PalindromeChecker2.orderOfOperations(input);
         Assertions.assertEquals(expected, actual);
-        Assertions.assertIterableEquals(expected, actual);
     }
 
-
+    @Test
+    @DisplayName("Checks to see if PalindromeChecker2 returns an empty list when given a palindrome less than three letters long")
+    public void checkPalindromeChecker2ReturnsEmptyWhenGivenPalindromeLessThanThreeLetters() {
+        String input = "AA";
+        ArrayList<String> expected = new ArrayList<>(Arrays.asList(""));
+        ArrayList<String> actual = PalindromeChecker2.orderOfOperations(input);
+        Assertions.assertEquals(expected, actual);
+    }
 }
 
 

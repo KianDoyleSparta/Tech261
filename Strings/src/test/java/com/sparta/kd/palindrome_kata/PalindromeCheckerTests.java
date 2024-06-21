@@ -1,6 +1,6 @@
 package com.sparta.kd.palindrome_kata;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 

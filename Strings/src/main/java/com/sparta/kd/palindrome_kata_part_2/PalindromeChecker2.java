@@ -2,7 +2,6 @@ package com.sparta.kd.palindrome_kata_part_2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 
 public class PalindromeChecker2 {
@@ -30,16 +29,18 @@ public class PalindromeChecker2 {
         return String.valueOf(flippedInput);
     }
 
-    public static ArrayList<String> getPalindromes(String[] words) {
+    public static ArrayList<String> getPalindromesAndRemoveSmallWords(String[] words) {
         ArrayList<String> wordsArray = new ArrayList<>(Arrays.asList(words));
         wordsArray.removeIf(word -> !isPalindrome(word));
-
+        if (!wordsArray.isEmpty()) {
+            wordsArray.removeIf(word -> word.length() < 3);
+        }
         return wordsArray;
     }
 
     public static ArrayList<String> getLongestPalindrome(ArrayList<String> palindromes) {
         int longestPalindromeLength = Collections.max(palindromes).length();
-        palindromes.removeIf(s -> s.length() < longestPalindromeLength);
+        palindromes.removeIf(palindrome -> palindrome.length() < longestPalindromeLength);
         return palindromes;
     }
 
@@ -58,7 +59,7 @@ public class PalindromeChecker2 {
         String cleanSentence = PalindromeChecker2.cleanSentence(sentence);
         String lowerCleanSentence = PalindromeChecker2.toLowerCase(cleanSentence);
         String[] words = PalindromeChecker2.splitSentence(lowerCleanSentence);
-        ArrayList<String> palindromes = PalindromeChecker2.getPalindromes(words);
+        ArrayList<String> palindromes = PalindromeChecker2.getPalindromesAndRemoveSmallWords(words);
         ArrayList<String> longestPalindromes = PalindromeChecker2.getLongestPalindrome(palindromes);
         ArrayList<String> cleanedPalindromes = PalindromeChecker2.removeDuplicates(longestPalindromes);
 
@@ -66,15 +67,3 @@ public class PalindromeChecker2 {
     }
 
 }
-
-//Find the longest palindrome in the sentence
-//
-//A sentence is defined as a single string made up over space separated words
-//
-//Special characters, numbers, etc. must be stripped away
-//
-// If there are two palindromes in the same string of the same longest length, return both palindromes
-//
-//Only individual words can be palindromes
-//
-//If the same palindrome appears multiple times only return it once
