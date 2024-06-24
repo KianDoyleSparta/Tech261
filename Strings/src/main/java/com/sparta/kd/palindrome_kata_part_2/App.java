@@ -9,7 +9,8 @@ public class App {
     public static void main(String[] args) {
         String sentence = "This is a sentence that contains one palindrome: racecar, a false palindrome: race car, some special characters: !#*, a palindrome separated by special characters: pan!s#nap.";
 
-        System.out.println(PalindromeChecker2.orderOfOperations(sentence));
+        String sentenceEmpty = "";
+        System.out.println(PalindromeChecker2.orderOfOperations(sentenceEmpty));
 
     }
 }

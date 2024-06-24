@@ -39,8 +39,10 @@ public class PalindromeChecker2 {
     }
 
     public static ArrayList<String> getLongestPalindrome(ArrayList<String> palindromes) {
-        int longestPalindromeLength = Collections.max(palindromes).length();
-        palindromes.removeIf(palindrome -> palindrome.length() < longestPalindromeLength);
+        if (!palindromes.isEmpty()) {
+            int longestPalindromeLength = Collections.max(palindromes).length();
+            palindromes.removeIf(palindrome -> palindrome.length() < longestPalindromeLength);
+        }
         return palindromes;
     }
 

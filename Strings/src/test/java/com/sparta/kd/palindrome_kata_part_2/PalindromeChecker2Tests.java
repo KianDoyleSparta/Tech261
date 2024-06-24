@@ -13,9 +13,9 @@ public class PalindromeChecker2Tests {
     @DisplayName("Checks to see if PalindromeChecker2 returns a null array when given a null sentence")
     public void checkPalindromeChecker2ReturnsNullWhenGivenNull() {
         String input = "";
-        ArrayList<String> expected = new ArrayList<>(Arrays.asList(""));
+        ArrayList<String> expected = new ArrayList<>();
         ArrayList<String> actual = PalindromeChecker2.orderOfOperations(input);
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class PalindromeChecker2Tests {
     @DisplayName("Checks to see if PalindromeChecker2 returns an empty list when given only numbers")
     public void checkPalindromeChecker2ReturnsEmptyWhenGivenNumbersOnly() {
         String input = "1111111111";
-        ArrayList<String> expected = new ArrayList<>(Arrays.asList(""));
+        ArrayList<String> expected = new ArrayList<>();
         ArrayList<String> actual = PalindromeChecker2.orderOfOperations(input);
         Assertions.assertEquals(expected, actual);
     }
@@ -67,9 +67,9 @@ public class PalindromeChecker2Tests {
     @DisplayName("Checks to see if PalindromeChecker2 returns an empty list when given a palindrome less than three letters long")
     public void checkPalindromeChecker2ReturnsEmptyWhenGivenPalindromeLessThanThreeLetters() {
         String input = "AA";
-        ArrayList<String> expected = new ArrayList<>(Arrays.asList(""));
+        ArrayList<String> expected = new ArrayList<>();
         ArrayList<String> actual = PalindromeChecker2.orderOfOperations(input);
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
     }
 }
 
