@@ -1,9 +1,7 @@
 package com.sparta.kd;
 
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.XMLFormatter;
+import java.io.IOException;
+import java.util.logging.*;
 
 public class App {
 
@@ -15,6 +13,16 @@ public class App {
         consoleHandler.setFormatter(new CustomFormatter());
 
         logger.addHandler(consoleHandler);
+
+        try {
+            FileHandler fileHandler = new FileHandler("src/main/resources/log-file.log", true);
+            fileHandler.setLevel(Level.ALL);
+            fileHandler.setFormatter(new CustomFormatter());
+            logger.addHandler(fileHandler);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
         logger.setLevel(Level.ALL);
 
