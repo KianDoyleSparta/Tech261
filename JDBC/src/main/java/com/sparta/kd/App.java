@@ -14,10 +14,16 @@ public class App {
     public static void main(String[] args) {
 
         try {
-            ResultSet resulSet = statement.executeQuery("SELECT * FROM northwind.customers");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM northwind.customers");
+            while(resultSet.next()) {
+                System.out.println(resultSet.getInt(1) + " " + resultSet.getString(2));
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
 
     }
 }
