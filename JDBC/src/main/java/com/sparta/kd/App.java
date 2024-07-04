@@ -1,29 +1,23 @@
 package com.sparta.kd;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.*;
+import java.util.Properties;
 
 public class App {
-    // Connection
-    // Statements
-    // Results
+
+    public static Connector connector = Connector.getConnector();
+    public static Connection connection = connector.getConnection();
+    public static Statement statement = connector.getStatement();
 
     public static void main(String[] args) {
 
         try {
-            Connection connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/northwind",
-                    "root",
-                    "root");
-            if (connection != null) {
-                System.out.println("successful");
-            } else {
-                System.out.println("bad");
-            }
-
+            ResultSet resulSet = statement.executeQuery("SELECT * FROM northwind.customers");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 }
