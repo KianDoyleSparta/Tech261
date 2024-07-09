@@ -14,6 +14,10 @@ public class App {
 
         Key connectionWithKey = new Key();
 
-        connectionWithKey.connect(key, name);
+        connectionWithKey.connect(name, key);
     }
 }
+
+
+
+

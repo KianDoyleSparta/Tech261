@@ -1,7 +1,7 @@
 package com.sparta.kd;
 
 // Deals with state and behaviour
-public abstract class Animal {
+public abstract class Animal implements Drinkable {
     private String name;
     private String breed;
     private int age;
@@ -39,4 +39,7 @@ public abstract class Animal {
     public void play() {
         System.out.println(name + " wants to play");
     }
+
+    public abstract void eat(); // created a method without parent implementation
+
 }
