@@ -3,14 +3,22 @@ package com.sparta.kd.springrest.controllers;
 import com.sparta.kd.springrest.entities.Author;
 import com.sparta.kd.springrest.repositories.AuthorRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/api/authors")
@@ -37,8 +45,54 @@ public class AuthorsController {
         return new ResponseEntity<>(author, HttpStatus.OK);
     }
 
+    @GetMapping("/hateoas/authors/{id}")
+    public ResponseEntity<EntityModel<Author>> getAuthorHateoas(@PathVariable Integer id) {
+        EntityModel<Author> authorEntityModel = authorRepository.findById(id)
+                .map(
+                        author ->
+                        {
+                            List<Link> bookLinks =
+                                    author.getBooks()
+                                            .stream()
+                                            .map(book -> WebMvcLinkBuilder.linkTo(
+                                                    methodOn(BooksController.class).getBook(book.getId())).withRel(book.getTitle()))
+                                            .collect(Collectors.toList());
+                            Link selfLink = WebMvcLinkBuilder.linkTo(
+                                    methodOn(AuthorsController.class).getAuthor(author.getId())).withSelfRel();
+                            Link relLink = WebMvcLinkBuilder.linkTo(methodOn(AuthorsController.class).getAuthors()).withRel("author");
+                            return EntityModel.of(author, selfLink, relLink).add(bookLinks);
+                            }).orElse(null);
+
+        return ResponseEntity.ok(authorEntityModel);
+    }
+
+    @GetMapping("/hateoas/authors")
+    public CollectionModel<EntityModel<Author>> getAuthorsHateoas() {
+        List<EntityModel<Author>> authors = authorRepository.findAll()
+                .stream()
+                .map(
+                        author ->
+                        {
+                            List<Link> bookLinks =
+                                    author.getBooks()
+                                            .stream()
+                                            .map(
+                                                    book -> WebMvcLinkBuilder.linkTo(
+                                                            methodOn(BooksController.class).getBook(book.getId())).withRel(book.getTitle()))
+                                            .collect( Collectors.toList());
+                            Link selfLink = WebMvcLinkBuilder.linkTo(
+                                    methodOn(AuthorsController.class).getAuthor(author.getId())).withSelfRel();
+                            Link relLink = WebMvcLinkBuilder.linkTo(methodOn(AuthorsController.class).getAuthors()).withRel("author");
+                            return EntityModel.of(author, selfLink, relLink).add(bookLinks);
+                        })
+                .collect(Collectors.toList());
+        return CollectionModel.of(
+                authors,
+                WebMvcLinkBuilder.linkTo(methodOn(AuthorsController.class).getAuthorsHateoas()).withSelfRel());
+    }
+
     @PostMapping
-    public ResponseEntity<Author> createAuthor(@RequestBody Author author, HttpServletRequest request) {
+    public ResponseEntity<Author> createAuthor(@RequestBody @Valid Author author, HttpServletRequest request) {
         authorRepository.save(author);
 
         URI location = URI.create(request.getRequestURL().toString() + "/" + author.getId());

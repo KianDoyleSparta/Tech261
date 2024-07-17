@@ -6,6 +6,7 @@ import com.sparta.kd.springrest.exceptions.ResourceNotFoundException;
 import com.sparta.kd.springrest.repositories.AuthorRepository;
 import com.sparta.kd.springrest.repositories.BookRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +40,7 @@ public class BooksController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> createBook(@RequestBody Book book, HttpServletRequest request) {
+    public ResponseEntity<Book> createBook(@RequestBody @Valid Book book, HttpServletRequest request) {
         if (book.getAuthor().getId() == null) {
             authorRepository.save(book.getAuthor());
         } else if (!authorRepository.existsById(book.getAuthor().getId())) {
@@ -55,7 +56,9 @@ public class BooksController {
         if (!id.equals(book.getId())) {
             return ResponseEntity.badRequest().body(null);
         } else if (!bookRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            throw new ResourceNotFoundException("Book with id " + book.getId() + " not found");
+        } else if (!authorRepository.existsById(book.getAuthor().getId())) {
+            throw new ResourceNotFoundException("Author with id " + book.getAuthor().getId() + " not found");
         } else {
             bookRepository.save(book);
             return ResponseEntity.ok(null);
