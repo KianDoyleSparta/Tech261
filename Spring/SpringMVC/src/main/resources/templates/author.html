@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Author</title>
+</head>
+<body>
+    <h1>Welcome to the authors page!</h1>
+    <p th:text="'The author you have requested is: ID: ' + ${author.getId()} + ', Name: ' + ${author.getFullName()}"></p>
+</body>
+</html>
